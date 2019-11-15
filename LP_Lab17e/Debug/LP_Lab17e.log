@@ -1,0 +1,4 @@
+﻿  Assembling Source.asm...
+Source.asm(65): warning A6004: procedure argument or local not referenced : intfield
+LINK : warning LNK4098: сшсышюЄхър яю єьюыўрэш■ "libucrt.lib" яЁюЄштюЁхўшЄ шёяюы№чютрэш■ фЁєушї сшсышюЄхъ; шёяюы№чєщЄх ярЁрьхЄЁ /NODEFAULTLIB:library
+  LP_Lab17e.vcxproj -> C:\Users\admin\Desktop\LP\LP_Lab17\Debug\LP_Lab17e.exe

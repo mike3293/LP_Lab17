@@ -1,0 +1,3 @@
+﻿  Assembling Source.asm...
+Source.asm(61): warning A6004: procedure argument or local not referenced : intfield
+  LP_Lab17b.vcxproj -> C:\Users\admin\Desktop\LP\LP_Lab17\Debug\LP_Lab17b.exe

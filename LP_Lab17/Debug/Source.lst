@@ -1,0 +1,107 @@
+Microsoft (R) Macro Assembler Version 14.16.27032.1	    11/15/19 16:11:07
+Source.asm						     Page 1 - 1
+
+
+				.586
+				.model flat, stdcall
+				includelib kernel32.lib
+				ExitProcess PROTO : DWORD
+
+				.stack 4096
+
+ 00000000			.const
+
+ 00000000			.data
+ 00000000 00000003		arr dword 3, 3, 2, 4, -10, 6, -11, 8, 20, 0
+	   00000003
+	   00000002
+	   00000004
+	   FFFFFFF6
+	   00000006
+	   FFFFFFF5
+	   00000008
+	   00000014
+	   00000000
+ 00000028 00000000		max dword ?
+ 0000002C 00000000		min dword ?
+
+ 00000000			.code
+ 00000000			getmin PROC parr: dword, count: dword
+ 00000003  83 6D 0C 01		sub count, 1
+ 00000007  8B 4D 0C		mov ecx, count
+ 0000000A  8B 75 08		mov esi, parr
+ 0000000D  8B 06		mov eax, [esi]
+ 0000000F  83 C6 04		add esi, 4
+ 00000012			CYCLE:
+ 00000012  2B 06			sub eax, [esi]
+ 00000014  78 02			js IS_NOTMIN
+ 00000016  79 04			jns IS_MIN
+ 00000018			IS_NOTMIN:
+ 00000018  03 06			add eax, [esi]
+ 0000001A  EB 04			jmp BACK
+ 0000001C			IS_MIN:
+ 0000001C  8B 06			mov eax, [esi]
+ 0000001E  EB 00			jmp BACK
+ 00000020			BACK:
+ 00000020  83 C6 04			add esi, 4
+ 00000023  E2 ED			loop CYCLE
+				ret
+ 00000029			getmin ENDP
+ 00000029			main PROC
+				invoke getmin, offset arr, lengthof arr
+ 00000035  A3 0000002C R	mov min, eax
+ 0000003A  6A 00		push 0
+ 0000003C  E8 00000000 E	call ExitProcess
+ 00000041			main ENDP
+				end main
+Microsoft (R) Macro Assembler Version 14.16.27032.1	    11/15/19 16:11:07
+Source.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+CONST  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'CONST'	 ReadOnly
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000030 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000041 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+getmin . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000029 Public STDCALL
+  parr . . . . . . . . . . . . .	DWord	 bp + 00000008
+  count  . . . . . . . . . . . .	DWord	 bp + 0000000C
+  CYCLE  . . . . . . . . . . . .	L Near	 00000012 _TEXT	
+  IS_NOTMIN  . . . . . . . . . .	L Near	 00000018 _TEXT	
+  IS_MIN . . . . . . . . . . . .	L Near	 0000001C _TEXT	
+  BACK . . . . . . . . . . . . .	L Near	 00000020 _TEXT	
+main . . . . . . . . . . . . . .	P Near	 00000029 _TEXT	Length= 00000018 Public STDCALL
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000003h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+arr  . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+max  . . . . . . . . . . . . . .	DWord	 00000028 _DATA	
+min  . . . . . . . . . . . . . .	DWord	 0000002C _DATA	
+
+	   0 Warnings
+	   0 Errors
